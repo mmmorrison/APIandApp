@@ -15,7 +15,7 @@ function All() {
 };
 
 router.get('/', function(req, res, next) {
-  All().select().then(function (results) {
+  Learning().select().then(function (results) {
       res.json(results);
     })
 });
