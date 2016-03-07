@@ -3,23 +3,18 @@ var app = angular.module("myApp", ['ngRoute', 'ngResource']);
 
 app.config(function($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
-
     $routeProvider
-      .when('/', {
-        templateUrl: 'partials/home.html',
-        controller: 'MainController'
+      .when('/resources', {
+        templateUrl: 'partials/resources/index.html',
+        controller: 'ResourcesController'
       })
-      .when('/cats', {
-        templateUrl: 'partials/cats/index.html',
-        controller: 'CatsIndexController'
+      .when('/newresource', {
+        templateUrl: 'partials/resources/new.html',
+        controller: 'NewController'
       })
-      .when('/newcat', {
-        templateUrl: 'partials/cats/new.html',
-        controller: 'CatsNewController'
-      })
-      .when('/cats/:id', {
-        templateUrl: 'partials/cats/show.html',
-        controller: 'CatsShowController'
+      .when('/resource/:id', {
+        templateUrl: 'partials/resources/show.html',
+        controller: 'ShowController'
       })
 
 });
