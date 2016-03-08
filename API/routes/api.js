@@ -11,7 +11,7 @@ function Comments() {
 }
 
 function All() {
-  return knex('all').join('learning', 'all.learning_id', 'learning.id').join('comments', 'all.comment_id', 'comments.id')
+  return knex('all').leftJoin('learning', 'all.learning_id', 'learning.id').leftJoin('comments', 'all.comment_id', 'comments.id')
 };
 
 router.get('/', function(req, res, next) {
@@ -20,18 +20,18 @@ router.get('/', function(req, res, next) {
     })
 });
 
-//
-// router.get('/', function(req, res, next) {
-//   Comments().select().then(function (results) {
-//       res.json(results);
-//     })
-// });
-
-
+router.get('/test', function (req, res, next) {
+  All().select().then(function(results) {
+    res.json(results)
+  })
+});
 
 router.get('/:id', function(req, res, next) {
-  Learning().where({id: req.params.id}).then(function(results) {
-    res.json(results)
+  Learning().where({id: req.params.id}).first().then(function(resource) {
+    Comments().where('learning_id', req.params.id).then(function (comments) {
+      resource.comments = comments;
+      res.json(resource)
+    })
   })
 });
 
