@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
   })
 });
 
-router.get('/test', function(req, res, next) {
+router.get('/test/:id', function(req, res, next) {
   Learning().where({id: req.params.id}).then(function(results) {
     Comments().where('learning_id, req.params.id').then(function(comments) {
       resource.comments = comments;
